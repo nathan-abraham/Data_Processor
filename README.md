@@ -6,4 +6,4 @@ Command line application that processes csv files.
  - matplotlib (```pip3 install matplotlib``` in terminal)
  - seaborn (```pip3 install seaborn``` in terminal)
  - requests (```pip3 install requests``` in terminal)
- - colorama (```pip3 isntall colorama``` in terminal)
+ - colorama (```pip3 install colorama``` in terminal)
