@@ -1,4 +1,8 @@
+import colorama
 import requests
+from colorama import Fore, Back, Style
+
+colorama.init(autoreset=True)
 
 def retry_decorator(error_message: str, exception=Exception):
     def middle_function(function):
@@ -7,8 +11,10 @@ def retry_decorator(error_message: str, exception=Exception):
                 try:
                     function(*args, **kwargs)
                 except exception:
-                    print(error_message)
+                    print(f"{Fore.RED}{Style.BRIGHT}{error_message}")
                     continue
+                except Exception:
+                    print(f"{Fore.RED}{Style.BRIGHT}An unexpected error occurred.")
                 break
         return wrapper_function
     return middle_function
@@ -25,11 +31,14 @@ def write_csv(content):
     csv_file.close()
 
 
-
 @retry_decorator("Invalid URL. Please try another one.", exception=requests.exceptions.MissingSchema)
 def get_csv():
     url = input("Please type in a URL to a csv file: ")
-    request = requests.get(url)
-    content = request.content
 
-    write_csv(content)
+    if url == "exit":
+        return   
+
+    request = requests.get(url)
+    csv_bytes = request.content
+
+    write_csv(csv_bytes)
