@@ -1,10 +1,12 @@
-import colorama
+import colorama # For printing colors on console
 from colorama import Fore, Style
 
+# Decorator to handle errors and retry after exceptions
 def retry_decorator(error_message: str, exception=Exception):
     def middle_function(function):
         def wrapper_function(*args, **kwargs):
             while True:
+				# If an error occurs, print an error message and ask them to retry
                 try:
                     return function(*args, **kwargs)
                 except exception:
@@ -16,7 +18,8 @@ def retry_decorator(error_message: str, exception=Exception):
     return middle_function
 
 def print_seperator():
-    line_len = 30
+	# Prints a string of "=" to serve as a separator
+    line_len = 45
     result = ""
     for _ in range(line_len):
         result += "="
@@ -30,11 +33,13 @@ def print_options():
     print_seperator()
 
 def startup():
+	# Print opening message and initialize colors
     colorama.init(autoreset=True)
     print(f"{Fore.BLUE}Welcome to the command line data processor!")
     print_seperator()
 
 @retry_decorator("Please type in a valid integer.", exception=ValueError)
 def choose() -> int:
-    choice = int(input(f"{Fore.WHITE}{Style.BRIGHT}Type in the number corresponding to the task you want to do: "))
+	# Get number indicating what the user wants to do
+    choice = int(input(f"{Fore.WHITE}{Style.BRIGHT}Type in the number corresponding to the task you want to do: {Style.RESET_ALL}"))
     return choice
