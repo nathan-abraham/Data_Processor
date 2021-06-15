@@ -8,7 +8,6 @@ import data_processor
 import console_utils
 
 
-
 test_url = "http://winterolympicsmedals.com/medals.csv"
 
 if __name__ == "__main__":
@@ -17,10 +16,10 @@ if __name__ == "__main__":
 
     # Initializing dataframe variable
     df = None
-    loaded = False
+    csv_csv_loaded = False
     while True:
-        console_utils.print_options() # Print options
-        choice = console_utils.choose() # Get input from user
+        console_utils.print_options()  # Print options
+        choice = console_utils.choose()  # Get input from user
 
         # Do different things based on input
         if choice == 1:
@@ -30,10 +29,10 @@ if __name__ == "__main__":
             # Create dataframe from csv
             if df != None:
                 df = pd.read_csv(f"{file_name}.csv", error_bad_lines=False)
-                loaded = True
-        elif loaded and choice == 2:
+                csv_loaded = True
+        elif csv_loaded and choice == 2:
             data_processor.drop_data(df)
-        elif loaded and choice == 3:
+        elif csv_loaded and choice == 3:
             pass
         elif choice == 5:
             break
@@ -44,5 +43,3 @@ if __name__ == "__main__":
             print("Load in a csv file first!")
             sleep(1)
         console_utils.print_seperator()
-    
-    

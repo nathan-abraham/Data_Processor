@@ -9,7 +9,8 @@ colorama.init(autoreset=True)
 @retry_decorator("Invalid file name. Please try again.", exception=OSError)
 def write_csv(content):
     # Get input for the name of the file
-    file_name = input(f"{Fore.LIGHTBLUE_EX}Please type in a name for the file (do not add .csv): ")
+    file_name = input(
+        f"{Fore.LIGHTBLUE_EX}Please type in a name for the file (do not add .csv): ")
 
     if file_name == "exit":
         return
@@ -29,7 +30,7 @@ def get_csv():
     url = input(f"{Fore.LIGHTBLUE_EX}Please type in a URL to a csv file: ")
 
     if url == "exit":
-        return 
+        return
 
     # Send a request to a website
     request = requests.get(url)
