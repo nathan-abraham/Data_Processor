@@ -25,7 +25,7 @@ def print_seperator():
 def print_options():
     # User will type in a number, and the corresponding task will be executed
     print(f"{Fore.CYAN}1: Retrieve csv file from url")
-    print(f"{Fore.CYAN}2: Drop row or columns from data")
+    print(f"{Fore.CYAN}2: Drop row or columns from data (not fully implemented yet)")
     print(f"{Fore.CYAN}5: Exit the program")
     print_seperator()
 
