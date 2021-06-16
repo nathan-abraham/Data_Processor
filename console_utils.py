@@ -3,6 +3,7 @@ from colorama import Fore, Style
 
 # Decorator to handle errors and retry after exceptions
 
+colorama.init(autoreset=True)
 
 def retry_decorator(error_message: str, exception=Exception):
     def middle_function(function):
@@ -12,17 +13,17 @@ def retry_decorator(error_message: str, exception=Exception):
                 try:
                     return function(*args, **kwargs)
                 except exception:
-                    print(f"{Fore.RED}{Style.BRIGHT}{error_message}")
+                    print_error(error_message=error_message)
                     continue
                 except Exception:
-                    print(f"{Fore.RED}{Style.BRIGHT}An unexpected error occurred.")
+                    print_error(error_message="An unexpected error occurred.")
         return wrapper_function
     return middle_function
 
 
 def print_seperator():
     # Prints a string of "=" to serve as a separator
-    line_len = 45
+    line_len = 60
     result = ""
     for _ in range(line_len):
         result += "="
@@ -33,9 +34,15 @@ def print_options():
     # User will type in a number, and the corresponding task will be executed
     print(f"{Fore.CYAN}1: Retrieve csv file from url")
     print(f"{Fore.CYAN}2: Drop row or columns from data (not fully implemented yet)")
+    print(f"{Fore.CYAN}4: Save modified dataframe to a csv file")
     print(f"{Fore.CYAN}5: Exit the program")
     print_seperator()
 
+def print_error(error_message: str):
+    print(f"{Fore.RED}{Style.BRIGHT}{error_message}")
+
+def print_success(message: str):
+    print(f"{Fore.CYAN}{Style.BRIGHT}{message}")
 
 def startup():
     # Print opening message and initialize colors
