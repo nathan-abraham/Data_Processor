@@ -37,7 +37,7 @@ if __name__ == "__main__":
         elif csv_loaded and choice == 2:
             data_processor.drop_data(df)
         elif csv_loaded and choice == 3:
-            data_processor.get_file_name()
+            data_processor.graph_data(df)
         elif choice == 4:
             if df.empty:
                 console_utils.print_error("Load in a csv file first!")

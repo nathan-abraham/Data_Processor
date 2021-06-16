@@ -33,14 +33,17 @@ def print_seperator():
 def print_options():
     # User will type in a number, and the corresponding task will be executed
     print(f"{Fore.CYAN}1: Retrieve csv file from url")
-    print(f"{Fore.CYAN}2: Drop row or columns from data (not fully implemented yet)")
+    print(f"{Fore.CYAN}2: Drop row or columns from data")
+    print(f"{Fore.CYAN}3: Graph columns of data")
     print(f"{Fore.CYAN}4: Save modified dataframe to a csv file")
     print(f"{Fore.CYAN}5: Exit the program")
     print_seperator()
 
+# Print an error message in bright red
 def print_error(error_message: str):
     print(f"{Fore.RED}{Style.BRIGHT}{error_message}")
 
+# Print a success message in bright cyan
 def print_success(message: str):
     print(f"{Fore.CYAN}{Style.BRIGHT}{message}")
 
