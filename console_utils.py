@@ -1,5 +1,7 @@
 import colorama  # For printing colors on console
 from colorama import Fore, Style
+from rich.progress import track
+from time import sleep
 
 # Decorator to handle errors and retry after exceptions
 
@@ -34,9 +36,10 @@ def print_options():
     # User will type in a number, and the corresponding task will be executed
     print(f"{Fore.CYAN}1: Retrieve csv file from url")
     print(f"{Fore.CYAN}2: Drop row or columns from data")
-    print(f"{Fore.CYAN}3: Graph columns of data")
-    print(f"{Fore.CYAN}4: Save modified dataframe to a csv file")
-    print(f"{Fore.CYAN}5: Exit the program")
+    print(f"{Fore.CYAN}3: Graph columns of data (NOT implemented yet)")
+    print(f"{Fore.CYAN}4: Remove outliers from the data")
+    print(f"{Fore.CYAN}5: Save modified dataframe to a csv file")
+    print(f"{Fore.CYAN}6: Exit the program")
     print_seperator()
 
 # Print an error message in bright red
@@ -60,3 +63,16 @@ def choose() -> int:
     choice = int(input(
         f"{Fore.WHITE}{Style.BRIGHT}Type in the number corresponding to the task you want to do: {Style.RESET_ALL}"))
     return choice
+
+@retry_decorator("Please type in a float value between 0 and 1", exception=ValueError)
+def choose_float(message: str) -> int:
+    # Get number indicating what the user wants to do
+    choice = float(input(
+        f"{Fore.WHITE}{Style.BRIGHT}{message}{Style.RESET_ALL}"))
+    if choice > 1 or choice < 0:
+        raise ValueError("Please type in a float value between 0 and 1")
+    return choice
+
+def dummy_progress_bar(message, reps=10, increment=0.05):
+    for i in track(range(reps), description="[cyan]" + message):
+        sleep(increment)

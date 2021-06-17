@@ -1,7 +1,9 @@
 import colorama
 import requests
 from colorama import Fore, Back, Style
-from console_utils import print_seperator, retry_decorator
+from console_utils import print_seperator, retry_decorator, dummy_progress_bar
+from rich.progress import track
+from time import sleep
 
 colorama.init(autoreset=True)
 
@@ -18,8 +20,11 @@ def write_csv(content):
     # Create a new csv file with that name in 'write' mode
     csv_file = open(f"{file_name}.csv", "wb")
 
+    dummy_progress_bar("Writing csv...")
+
     # Write the content to the file, close it, then return the file name
     csv_file.write(content)
+
     csv_file.close()
     return file_name
 
@@ -34,6 +39,7 @@ def get_csv():
 
     # Send a request to a website
     request = requests.get(url)
+    dummy_progress_bar("Retrieving csv...")
     # Get raw csv raw bytes
     csv_bytes = request.content
 
