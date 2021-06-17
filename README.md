@@ -7,3 +7,4 @@ Command line application that processes csv files.
  - seaborn (```pip3 install seaborn``` in terminal)
  - requests (```pip3 install requests``` in terminal)
  - colorama (```pip3 install colorama``` in terminal)
+ - rich (```pip3 install rich``` in terminal)
