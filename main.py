@@ -36,23 +36,29 @@ if __name__ == "__main__":
                 csv_loaded = True
                 console_utils.dummy_progress_bar("Loading dataframe...")
             sleep(1)
-        elif csv_loaded and choice == 2:
-            data_processor.drop_data(df)
+        elif choice == 2:
+            df = csv_utils.load_csv_from_file()
+            console_utils.dummy_progress_bar("Loading dataframe...")
+            csv_loaded = True
         elif csv_loaded and choice == 3:
-            data_processor.graph_data(df)
+            data_processor.drop_data(df)
         elif csv_loaded and choice == 4:
+            data_processor.graph_data(df)
+        elif csv_loaded and choice == 5:
             data_processor.remove_outliers(df)
             sleep(1)
-        elif choice == 5:
+        elif csv_loaded and choice == 6:
+            data_processor.sort_data(df)
+        elif choice == 7:
             if df.empty:
                 console_utils.print_error("Load in a csv file first!")
             else:
                 file_name = data_processor.get_file_name()
                 data_processor.save_csv(df, file_name=file_name)
             sleep(1)
-        elif choice == 6:
+        elif choice == 8:
             break
-        elif choice > 6:
+        elif choice > 8:
             console_utils.print_error("Enter a number between 1 and 6")
             sleep(1)
         else:
