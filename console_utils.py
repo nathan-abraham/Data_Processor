@@ -35,11 +35,13 @@ def print_seperator():
 def print_options():
     # User will type in a number, and the corresponding task will be executed
     print(f"{Fore.CYAN}1: Retrieve csv file from url")
-    print(f"{Fore.CYAN}2: Drop row or columns from data")
-    print(f"{Fore.CYAN}3: Graph columns of data (NOT implemented yet)")
-    print(f"{Fore.CYAN}4: Remove outliers from the data")
-    print(f"{Fore.CYAN}5: Save modified dataframe to a csv file")
-    print(f"{Fore.CYAN}6: Exit the program")
+    print(f"{Fore.CYAN}2: Load csv file on this computer")
+    print(f"{Fore.CYAN}3: Drop row or columns from data")
+    print(f"{Fore.CYAN}4: Graph the data")
+    print(f"{Fore.CYAN}5: Remove outliers from the data")
+    print(f"{Fore.CYAN}6: Sort the data")
+    print(f"{Fore.CYAN}7: Save modified dataframe to a csv file")
+    print(f"{Fore.CYAN}8: Exit the program")
     print_seperator()
 
 # Print an error message in bright red
@@ -62,6 +64,17 @@ def choose() -> int:
     # Get number indicating what the user wants to do
     choice = int(input(
         f"{Fore.WHITE}{Style.BRIGHT}Type in the number corresponding to the task you want to do: {Style.RESET_ALL}"))
+    return choice
+
+def choose_str(msg: str) -> str:
+    choice = input(msg)
+    return choice
+
+@retry_decorator("Please type in a valid integer.", exception=ValueError)
+def choose_int(message: str) -> int:
+    # Get number indicating what the user wants to do
+    choice = int(input(
+        f"{Fore.WHITE}{Style.BRIGHT}{message}{Style.RESET_ALL}"))
     return choice
 
 @retry_decorator("Please type in a float value between 0 and 1", exception=ValueError)
