@@ -1,9 +1,11 @@
 import colorama
 import requests
+import pandas as pd
 from colorama import Fore, Back, Style
 from console_utils import print_seperator, retry_decorator, dummy_progress_bar
 from rich.progress import track
 from time import sleep
+from data_processor import get_file_name
 
 colorama.init(autoreset=True)
 
@@ -45,3 +47,8 @@ def get_csv():
 
     # Write content to csv file and return the result
     return write_csv(csv_bytes)
+
+@retry_decorator("File not found!")
+def load_csv_from_file() -> pd.DataFrame:
+    file_name = get_file_name()
+    return pd.read_csv(f"{file_name}.csv")
